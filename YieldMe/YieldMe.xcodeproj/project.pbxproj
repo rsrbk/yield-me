@@ -1,0 +1,787 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		375D97492BA5189600A48C65 /* CircleRequestModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375D97412BA5189500A48C65 /* CircleRequestModels.swift */; };
+		375D974A2BA5189600A48C65 /* CircleChallenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375D97422BA5189500A48C65 /* CircleChallenge.swift */; };
+		375D974B2BA5189600A48C65 /* CircleNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375D97432BA5189500A48C65 /* CircleNetworking.swift */; };
+		375D974C2BA5189600A48C65 /* YieldMeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375D97442BA5189500A48C65 /* YieldMeApp.swift */; };
+		375D974D2BA5189600A48C65 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375D97452BA5189500A48C65 /* UserDefaultsManager.swift */; };
+		375D974E2BA5189600A48C65 /* WalletSdkAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375D97462BA5189500A48C65 /* WalletSdkAdapter.swift */; };
+		375D974F2BA5189600A48C65 /* ProtocolDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375D97472BA5189600A48C65 /* ProtocolDetailView.swift */; };
+		375D97502BA5189600A48C65 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375D97482BA5189600A48C65 /* ContentView.swift */; };
+		375D97542BA518A100A48C65 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375D97512BA518A100A48C65 /* Toast.swift */; };
+		375D97552BA518A100A48C65 /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375D97522BA518A100A48C65 /* UserDefault.swift */; };
+		375D97572BA51DD600A48C65 /* PremiumPassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375D97562BA51DD600A48C65 /* PremiumPassView.swift */; };
+		378ADF592BA512E100F36413 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 378ADF582BA512E100F36413 /* Assets.xcassets */; };
+		378ADF5C2BA512E100F36413 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 378ADF5B2BA512E100F36413 /* Preview Assets.xcassets */; };
+		378ADF662BA512E100F36413 /* YieldMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378ADF652BA512E100F36413 /* YieldMeTests.swift */; };
+		378ADF702BA512E100F36413 /* YieldMeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378ADF6F2BA512E100F36413 /* YieldMeUITests.swift */; };
+		378ADF722BA512E100F36413 /* YieldMeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378ADF712BA512E100F36413 /* YieldMeUITestsLaunchTests.swift */; };
+		378ADF822BA5143700F36413 /* libyield_me.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 378ADF812BA5142900F36413 /* libyield_me.a */; };
+		378ADF8A2BA514BB00F36413 /* yield-me.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378ADF842BA5145D00F36413 /* yield-me.swift */; };
+		378ADF8B2BA514BE00F36413 /* SwiftBridgeCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378ADF882BA5145D00F36413 /* SwiftBridgeCore.swift */; };
+		8DCA889B7944853955F53507 /* Pods_YieldMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B47AADFD80C8AFDC29E8AFB5 /* Pods_YieldMe.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		378ADF622BA512E100F36413 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 378ADF492BA512E000F36413 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 378ADF502BA512E000F36413;
+			remoteInfo = YieldMe;
+		};
+		378ADF6C2BA512E100F36413 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 378ADF492BA512E000F36413 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 378ADF502BA512E000F36413;
+			remoteInfo = YieldMe;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		14A379BBE139EB73561D5DEE /* Pods-YieldMe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YieldMe.debug.xcconfig"; path = "Target Support Files/Pods-YieldMe/Pods-YieldMe.debug.xcconfig"; sourceTree = "<group>"; };
+		375D97412BA5189500A48C65 /* CircleRequestModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleRequestModels.swift; sourceTree = "<group>"; };
+		375D97422BA5189500A48C65 /* CircleChallenge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleChallenge.swift; sourceTree = "<group>"; };
+		375D97432BA5189500A48C65 /* CircleNetworking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleNetworking.swift; sourceTree = "<group>"; };
+		375D97442BA5189500A48C65 /* YieldMeApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YieldMeApp.swift; sourceTree = "<group>"; };
+		375D97452BA5189500A48C65 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		375D97462BA5189500A48C65 /* WalletSdkAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletSdkAdapter.swift; sourceTree = "<group>"; };
+		375D97472BA5189600A48C65 /* ProtocolDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProtocolDetailView.swift; sourceTree = "<group>"; };
+		375D97482BA5189600A48C65 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		375D97512BA518A100A48C65 /* Toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
+		375D97522BA518A100A48C65 /* UserDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
+		375D97562BA51DD600A48C65 /* PremiumPassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumPassView.swift; sourceTree = "<group>"; };
+		378ADF512BA512E000F36413 /* YieldMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YieldMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		378ADF582BA512E100F36413 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		378ADF5B2BA512E100F36413 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		378ADF612BA512E100F36413 /* YieldMeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YieldMeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		378ADF652BA512E100F36413 /* YieldMeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YieldMeTests.swift; sourceTree = "<group>"; };
+		378ADF6B2BA512E100F36413 /* YieldMeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YieldMeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		378ADF6F2BA512E100F36413 /* YieldMeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YieldMeUITests.swift; sourceTree = "<group>"; };
+		378ADF712BA512E100F36413 /* YieldMeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YieldMeUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		378ADF7F2BA5135600F36413 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
+		378ADF812BA5142900F36413 /* libyield_me.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libyield_me.a; path = ../target/universal/debug/libyield_me.a; sourceTree = "<group>"; };
+		378ADF832BA5145D00F36413 /* yield-me.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "yield-me.h"; sourceTree = "<group>"; };
+		378ADF842BA5145D00F36413 /* yield-me.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "yield-me.swift"; sourceTree = "<group>"; };
+		378ADF862BA5145D00F36413 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		378ADF872BA5145D00F36413 /* SwiftBridgeCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftBridgeCore.h; sourceTree = "<group>"; };
+		378ADF882BA5145D00F36413 /* SwiftBridgeCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftBridgeCore.swift; sourceTree = "<group>"; };
+		B47AADFD80C8AFDC29E8AFB5 /* Pods_YieldMe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YieldMe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CBCD00D21402E7FA17C66873 /* Pods-YieldMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YieldMe.release.xcconfig"; path = "Target Support Files/Pods-YieldMe/Pods-YieldMe.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		378ADF4E2BA512E000F36413 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				378ADF822BA5143700F36413 /* libyield_me.a in Frameworks */,
+				8DCA889B7944853955F53507 /* Pods_YieldMe.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		378ADF5E2BA512E100F36413 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		378ADF682BA512E100F36413 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		375D97532BA518A100A48C65 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				375D97512BA518A100A48C65 /* Toast.swift */,
+				375D97522BA518A100A48C65 /* UserDefault.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		378ADF482BA512E000F36413 = {
+			isa = PBXGroup;
+			children = (
+				378ADF892BA5145D00F36413 /* Generated */,
+				378ADF7F2BA5135600F36413 /* BridgingHeader.h */,
+				378ADF532BA512E000F36413 /* YieldMe */,
+				378ADF642BA512E100F36413 /* YieldMeTests */,
+				378ADF6E2BA512E100F36413 /* YieldMeUITests */,
+				378ADF522BA512E000F36413 /* Products */,
+				378ADF802BA5142900F36413 /* Frameworks */,
+				3A4F90F60ECFF6C9E0DCF7F4 /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		378ADF522BA512E000F36413 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				378ADF512BA512E000F36413 /* YieldMe.app */,
+				378ADF612BA512E100F36413 /* YieldMeTests.xctest */,
+				378ADF6B2BA512E100F36413 /* YieldMeUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		378ADF532BA512E000F36413 /* YieldMe */ = {
+			isa = PBXGroup;
+			children = (
+				375D97422BA5189500A48C65 /* CircleChallenge.swift */,
+				375D97432BA5189500A48C65 /* CircleNetworking.swift */,
+				375D97412BA5189500A48C65 /* CircleRequestModels.swift */,
+				375D97482BA5189600A48C65 /* ContentView.swift */,
+				375D97562BA51DD600A48C65 /* PremiumPassView.swift */,
+				375D97472BA5189600A48C65 /* ProtocolDetailView.swift */,
+				375D97452BA5189500A48C65 /* UserDefaultsManager.swift */,
+				375D97462BA5189500A48C65 /* WalletSdkAdapter.swift */,
+				375D97442BA5189500A48C65 /* YieldMeApp.swift */,
+				375D97532BA518A100A48C65 /* Helpers */,
+				378ADF582BA512E100F36413 /* Assets.xcassets */,
+				378ADF5A2BA512E100F36413 /* Preview Content */,
+			);
+			path = YieldMe;
+			sourceTree = "<group>";
+		};
+		378ADF5A2BA512E100F36413 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				378ADF5B2BA512E100F36413 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		378ADF642BA512E100F36413 /* YieldMeTests */ = {
+			isa = PBXGroup;
+			children = (
+				378ADF652BA512E100F36413 /* YieldMeTests.swift */,
+			);
+			path = YieldMeTests;
+			sourceTree = "<group>";
+		};
+		378ADF6E2BA512E100F36413 /* YieldMeUITests */ = {
+			isa = PBXGroup;
+			children = (
+				378ADF6F2BA512E100F36413 /* YieldMeUITests.swift */,
+				378ADF712BA512E100F36413 /* YieldMeUITestsLaunchTests.swift */,
+			);
+			path = YieldMeUITests;
+			sourceTree = "<group>";
+		};
+		378ADF802BA5142900F36413 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				378ADF812BA5142900F36413 /* libyield_me.a */,
+				B47AADFD80C8AFDC29E8AFB5 /* Pods_YieldMe.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		378ADF852BA5145D00F36413 /* yield-me */ = {
+			isa = PBXGroup;
+			children = (
+				378ADF832BA5145D00F36413 /* yield-me.h */,
+				378ADF842BA5145D00F36413 /* yield-me.swift */,
+			);
+			path = "yield-me";
+			sourceTree = "<group>";
+		};
+		378ADF892BA5145D00F36413 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				378ADF852BA5145D00F36413 /* yield-me */,
+				378ADF862BA5145D00F36413 /* .gitignore */,
+				378ADF872BA5145D00F36413 /* SwiftBridgeCore.h */,
+				378ADF882BA5145D00F36413 /* SwiftBridgeCore.swift */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
+		3A4F90F60ECFF6C9E0DCF7F4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				14A379BBE139EB73561D5DEE /* Pods-YieldMe.debug.xcconfig */,
+				CBCD00D21402E7FA17C66873 /* Pods-YieldMe.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		378ADF502BA512E000F36413 /* YieldMe */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 378ADF752BA512E100F36413 /* Build configuration list for PBXNativeTarget "YieldMe" */;
+			buildPhases = (
+				79A0E7366981EB5E7282289C /* [CP] Check Pods Manifest.lock */,
+				378ADF7E2BA5132200F36413 /* ShellScript */,
+				378ADF4D2BA512E000F36413 /* Sources */,
+				378ADF4E2BA512E000F36413 /* Frameworks */,
+				378ADF4F2BA512E000F36413 /* Resources */,
+				EF7ECEAE624243B436A289CA /* [CP] Embed Pods Frameworks */,
+				39B4315862AA0926213C44C7 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = YieldMe;
+			productName = YieldMe;
+			productReference = 378ADF512BA512E000F36413 /* YieldMe.app */;
+			productType = "com.apple.product-type.application";
+		};
+		378ADF602BA512E100F36413 /* YieldMeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 378ADF782BA512E100F36413 /* Build configuration list for PBXNativeTarget "YieldMeTests" */;
+			buildPhases = (
+				378ADF5D2BA512E100F36413 /* Sources */,
+				378ADF5E2BA512E100F36413 /* Frameworks */,
+				378ADF5F2BA512E100F36413 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				378ADF632BA512E100F36413 /* PBXTargetDependency */,
+			);
+			name = YieldMeTests;
+			productName = YieldMeTests;
+			productReference = 378ADF612BA512E100F36413 /* YieldMeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		378ADF6A2BA512E100F36413 /* YieldMeUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 378ADF7B2BA512E100F36413 /* Build configuration list for PBXNativeTarget "YieldMeUITests" */;
+			buildPhases = (
+				378ADF672BA512E100F36413 /* Sources */,
+				378ADF682BA512E100F36413 /* Frameworks */,
+				378ADF692BA512E100F36413 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				378ADF6D2BA512E100F36413 /* PBXTargetDependency */,
+			);
+			name = YieldMeUITests;
+			productName = YieldMeUITests;
+			productReference = 378ADF6B2BA512E100F36413 /* YieldMeUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		378ADF492BA512E000F36413 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1530;
+				LastUpgradeCheck = 1530;
+				TargetAttributes = {
+					378ADF502BA512E000F36413 = {
+						CreatedOnToolsVersion = 15.3;
+					};
+					378ADF602BA512E100F36413 = {
+						CreatedOnToolsVersion = 15.3;
+						TestTargetID = 378ADF502BA512E000F36413;
+					};
+					378ADF6A2BA512E100F36413 = {
+						CreatedOnToolsVersion = 15.3;
+						TestTargetID = 378ADF502BA512E000F36413;
+					};
+				};
+			};
+			buildConfigurationList = 378ADF4C2BA512E000F36413 /* Build configuration list for PBXProject "YieldMe" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 378ADF482BA512E000F36413;
+			productRefGroup = 378ADF522BA512E000F36413 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				378ADF502BA512E000F36413 /* YieldMe */,
+				378ADF602BA512E100F36413 /* YieldMeTests */,
+				378ADF6A2BA512E100F36413 /* YieldMeUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		378ADF4F2BA512E000F36413 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				378ADF5C2BA512E100F36413 /* Preview Assets.xcassets in Resources */,
+				378ADF592BA512E100F36413 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		378ADF5F2BA512E100F36413 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		378ADF692BA512E100F36413 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		378ADF7E2BA5132200F36413 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n./build-rust.sh\n";
+		};
+		39B4315862AA0926213C44C7 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YieldMe/Pods-YieldMe-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YieldMe/Pods-YieldMe-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YieldMe/Pods-YieldMe-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		79A0E7366981EB5E7282289C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-YieldMe-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EF7ECEAE624243B436A289CA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YieldMe/Pods-YieldMe-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YieldMe/Pods-YieldMe-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YieldMe/Pods-YieldMe-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		378ADF4D2BA512E000F36413 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				378ADF8B2BA514BE00F36413 /* SwiftBridgeCore.swift in Sources */,
+				375D974F2BA5189600A48C65 /* ProtocolDetailView.swift in Sources */,
+				375D974C2BA5189600A48C65 /* YieldMeApp.swift in Sources */,
+				375D974B2BA5189600A48C65 /* CircleNetworking.swift in Sources */,
+				375D974D2BA5189600A48C65 /* UserDefaultsManager.swift in Sources */,
+				375D97572BA51DD600A48C65 /* PremiumPassView.swift in Sources */,
+				375D974A2BA5189600A48C65 /* CircleChallenge.swift in Sources */,
+				375D97502BA5189600A48C65 /* ContentView.swift in Sources */,
+				375D974E2BA5189600A48C65 /* WalletSdkAdapter.swift in Sources */,
+				375D97552BA518A100A48C65 /* UserDefault.swift in Sources */,
+				375D97542BA518A100A48C65 /* Toast.swift in Sources */,
+				375D97492BA5189600A48C65 /* CircleRequestModels.swift in Sources */,
+				378ADF8A2BA514BB00F36413 /* yield-me.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		378ADF5D2BA512E100F36413 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				378ADF662BA512E100F36413 /* YieldMeTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		378ADF672BA512E100F36413 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				378ADF722BA512E100F36413 /* YieldMeUITestsLaunchTests.swift in Sources */,
+				378ADF702BA512E100F36413 /* YieldMeUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		378ADF632BA512E100F36413 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 378ADF502BA512E000F36413 /* YieldMe */;
+			targetProxy = 378ADF622BA512E100F36413 /* PBXContainerItemProxy */;
+		};
+		378ADF6D2BA512E100F36413 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 378ADF502BA512E000F36413 /* YieldMe */;
+			targetProxy = 378ADF6C2BA512E100F36413 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		378ADF732BA512E100F36413 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		378ADF742BA512E100F36413 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		378ADF762BA512E100F36413 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 14A379BBE139EB73561D5DEE /* Pods-YieldMe.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"YieldMe/Preview Content\"";
+				DEVELOPMENT_TEAM = 6U6DEJ8A2S;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../target/universal/debug";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rsrbk.YieldMe;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/BridgingHeader.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		378ADF772BA512E100F36413 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CBCD00D21402E7FA17C66873 /* Pods-YieldMe.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"YieldMe/Preview Content\"";
+				DEVELOPMENT_TEAM = 6U6DEJ8A2S;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../target/universal/release";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rsrbk.YieldMe;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/BridgingHeader.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		378ADF792BA512E100F36413 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6U6DEJ8A2S;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rsrbk.YieldMeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/YieldMe.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/YieldMe";
+			};
+			name = Debug;
+		};
+		378ADF7A2BA512E100F36413 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6U6DEJ8A2S;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rsrbk.YieldMeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/YieldMe.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/YieldMe";
+			};
+			name = Release;
+		};
+		378ADF7C2BA512E100F36413 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6U6DEJ8A2S;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rsrbk.YieldMeUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = YieldMe;
+			};
+			name = Debug;
+		};
+		378ADF7D2BA512E100F36413 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6U6DEJ8A2S;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rsrbk.YieldMeUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = YieldMe;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		378ADF4C2BA512E000F36413 /* Build configuration list for PBXProject "YieldMe" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				378ADF732BA512E100F36413 /* Debug */,
+				378ADF742BA512E100F36413 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		378ADF752BA512E100F36413 /* Build configuration list for PBXNativeTarget "YieldMe" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				378ADF762BA512E100F36413 /* Debug */,
+				378ADF772BA512E100F36413 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		378ADF782BA512E100F36413 /* Build configuration list for PBXNativeTarget "YieldMeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				378ADF792BA512E100F36413 /* Debug */,
+				378ADF7A2BA512E100F36413 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		378ADF7B2BA512E100F36413 /* Build configuration list for PBXNativeTarget "YieldMeUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				378ADF7C2BA512E100F36413 /* Debug */,
+				378ADF7D2BA512E100F36413 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 378ADF492BA512E000F36413 /* Project object */;
+}

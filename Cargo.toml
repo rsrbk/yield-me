@@ -1,0 +1,18 @@
+[package]
+name = "yield-me"
+version = "0.1.0"
+edition = "2021"
+
+build = "build.rs"
+
+[build-dependencies]
+swift-bridge-build = "0.1"
+
+[lib]
+crate-type = ["staticlib"]
+
+[dependencies]
+swift-bridge = "0.1"
+idkit = { git = "https://github.com/kroist/idkit-rs.git" }
+futures = "0.3.30"
+tokio = { version = "1.35.1", features = ["macros", "rt", "rt-multi-thread"] }
