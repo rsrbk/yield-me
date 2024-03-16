@@ -12,6 +12,7 @@ struct ProtocolDetailView: View {
     @State private var newCommentText: String = ""
     @State private var likesCount: Int = Int.random(in: 0...10)
     @State private var dislikesCount: Int = Int.random(in: 0...10)
+    @FocusState private var isInputFieldFocused: Bool // Step 1: Focus state
     
     @State private var comments: [Comment] = []
     
@@ -20,16 +21,16 @@ struct ProtocolDetailView: View {
     var body: some View {
         Form {
             Section {
-                     HStack {
-                         Spacer()
-                         Image(protocolItem.name) // Your logo image name
-                             .resizable()
-                             .scaledToFit()
-                             .frame(height: 100) // Adjust the height as needed
-                         Spacer()
-                     }
-                 }
-                 
+                HStack {
+                    Spacer()
+                    Image(protocolItem.name) // Your logo image name
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 100) // Adjust the height as needed
+                    Spacer()
+                }
+            }
+            
             Section(header: Text("Details")) {
                 HStack {
                     Text("Title")
@@ -124,13 +125,13 @@ struct ProtocolDetailView: View {
                     }
                     .padding()
                 }
-
+                
                 Section(header: Text("Comments")) {
                     if comments.isEmpty {
                         Text("No comments yet.")
                             .foregroundColor(.gray)
                     } else {
-                        ForEach(comments, id: \.id) { comment in
+                        ForEach(comments) { comment in
                             CommentView(comment: comment)
                         }
                     }
@@ -138,12 +139,14 @@ struct ProtocolDetailView: View {
                     HStack {
                         TextField("Add a comment...", text: $newCommentText)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .focused($isInputFieldFocused) // Step 2: Bind focus state
                         
                         Button(action: {
-                            // Actions to add the comment
-                            // Add the new comment to the list of comments
-                            // You would implement the logic to append the new comment here
-                            // For example, you might call a function to post the comment to your server or database
+                            let newId = (comments.max(by: { $0.id < $1.id })?.id ?? 0) + 1
+                            let newComment = Comment(id: newId, user: truncateString(UserDefaultsManager.shared.walletAddress!, toMaxLength: 20), text: newCommentText)
+                            comments.append(newComment)
+                            newCommentText = "" // Reset the text field
+                            isInputFieldFocused = false // Step 3: Dismiss the keyboard
                         }) {
                             Image(systemName: "paperplane.fill")
                                 .resizable()
@@ -210,4 +213,10 @@ struct CommentInputForm: View {
             .disabled(commentText.isEmpty)
         }
     }
+}
+
+func truncateString(_ string: String, toMaxLength maxLength: Int) -> String {
+    guard string.count > maxLength else { return string }
+    let index = string.index(string.startIndex, offsetBy: maxLength)
+    return String(string[..<index]) + "..."
 }
