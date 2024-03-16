@@ -17,6 +17,9 @@ struct ProtocolDetailView: View {
     
     @State private var comments: [Comment] = []
     
+    @State private var depositAmount: String = ""
+    @State private var isProcessingDeposit: Bool = false
+    
     let firebaseNetworking = FirebaseNetworking()
     
     var body: some View {
@@ -92,6 +95,34 @@ struct ProtocolDetailView: View {
                     Spacer()
                     GaugeView(title: "out of 100", value: protocolItem.rating * 20, colors: [.red, .orange, .yellow, .green])
                         .frame(height: 200, alignment: .center)
+                    Spacer()
+                }
+            }
+            
+            Section(header: Text("Deposit Funds")) {
+                TextField("Amount in USDC", text: $depositAmount)
+                    .keyboardType(.decimalPad)
+                    .multilineTextAlignment(.center) // Centers the text
+                    .disabled(isProcessingDeposit) // Disable editing during processing
+                
+                HStack {
+                    Spacer()
+                    Button(action: depositFunds) {
+                        if isProcessingDeposit {
+                            ProgressView()
+                                .progressViewStyle(CircularProgressViewStyle(tint: .blue))
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                .background(Color.white)
+                        } else {
+                            Text("Deposit")
+                        }
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .tint(.blue)
+                    .controlSize(.large)
+                    .padding(.top, 10)
+                    .padding(.bottom, 10)
+                    .disabled(depositAmount.isEmpty || isProcessingDeposit)
                     Spacer()
                 }
             }
@@ -175,6 +206,18 @@ struct ProtocolDetailView: View {
             Task.detached {
                 self.comments = await firebaseNetworking.fetchComments(for: protocolItem.id)
             }
+        }
+    }
+    
+    func depositFunds() {
+        // Start the progress animation
+        isProcessingDeposit = true
+
+        // Simulate a network request to deposit funds
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            // Transaction is sent; stop the progress animation
+            isProcessingDeposit = false
+            // Here you would have your logic to actually deposit the funds
         }
     }
 }

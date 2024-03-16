@@ -149,7 +149,7 @@ struct ContentView: View {
                                 Text("APR: \(item.wrappedValue.apr, specifier: "%.2f")%")
                                     .font(.subheadline) // Subtitle
                                     .foregroundColor(.secondary) // Subtle color for subtitle
-                                Text("Balance: $1000")//\(item.wrappedValue.balance, specifier: "%.2f")")
+                                Text("Chain: \(item.wrappedValue.network)")//\(item.wrappedValue.balance, specifier: "%.2f")")
                                     .font(.subheadline) // Balance
                                     .foregroundColor(.secondary) // Subtle color for balance
                             }
