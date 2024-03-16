@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import CircleProgrammableWalletSDK
 
 struct PremiumPassView: View {
     @State private var isStepOneCompleted: Bool = false
     
+    @Environment(\.presentationMode) var presentationMode
     @Environment(\.openURL) private var openURL
     @State var isLoadingWorldCoin: Bool = false
     
@@ -18,6 +20,15 @@ struct PremiumPassView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
+                HStack {
+                    Spacer() // Pushes the button to the right
+                    Button("Close") {
+                        // Dismiss the sheet
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                    .padding()
+                }
+                
                 // Logo with rounded corners and light grey margins
                 Image("community_pass")
                     .resizable()
@@ -87,6 +98,9 @@ struct PremiumPassView: View {
                         
                         Button(action: {
                             // Implement the purchase functionality here
+                            Task.detached {
+                                await self.initiatePassMint()
+                            }
                         }) {
                             Text("Purchase for $10")
                                 .foregroundColor(.white)
@@ -119,6 +133,53 @@ struct PremiumPassView: View {
                 break
             default:
                 continue
+            }
+        }
+    }
+    
+    private func initiatePassMint() async {
+        let request = ContractExecutionChallengeRequest(
+            idempotencyKey: UUID().uuidString,
+            abiFunctionSignature: "function buyPass( address passReceiver, uint256 paymentPeriod, uint256 root, uint256 nullifierHash, uint256[8] calldata proof ) public returns (uint256)",
+            abiParameters: [
+                User.shared.address!,
+                "1",
+                proof!.merkle_root.toString(),
+                proof!.nullifier_hash.toString(),
+                proof!.proof.toString()
+            ],
+            contractAddress: "0x938545C68Ed97E993aFFcF306aF33d08f2525A78",
+            walletId: User.shared.walletID!)
+        let response = await CircleNetworking().createContractExecutionChallenge(requestModel: request)
+        
+        let challenge = CircleChallenge(userToken: User.shared.sessionToken!.data.userToken, encryptionKey: User.shared.sessionToken!.data.encryptionKey, challengeId: response!.data.challengeId)
+        executeChallenge(challenge: challenge)
+    }
+    
+    func executeChallenge(challenge: CircleChallenge) {
+        var showChallengeResult = true
+
+        WalletSdk.shared.execute(userToken: challenge.userToken,
+                                 encryptionKey: challenge.encryptionKey,
+                                 challengeIds: [challenge.challengeId]) { response in
+            switch response.result {
+            case .success(let result):
+                let challengeStatus = result.status.rawValue
+                let challeangeType = result.resultType.rawValue
+                let warningType = response.onWarning?.warningType
+                let warningString = warningType != nil ?
+                " (\(warningType!))" : ""
+
+                response.onErrorController?.dismiss(animated: true)
+
+            case .failure(let error):
+                if error.errorCode == .userCanceled {
+                    showChallengeResult = false
+                }
+            }
+
+            if let onWarning = response.onWarning {
+                print(onWarning)
             }
         }
     }

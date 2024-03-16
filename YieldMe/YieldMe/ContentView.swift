@@ -20,9 +20,16 @@ struct ContentView: View {
     @State var toastConfig: Toast.Config = .init()
     
     @State var isLoading: Bool = false
-    @State var walletAddress: String?
+    @State var address: String?
     
     @State private var isCommunityPassPresented = false
+    
+    @State var walletAddress: String?
+    @State var walletID: String?
+
+    @State var balance: String = "0"
+    
+    @State var userToken: String = ""
     
     let items: [ProtocolItem] = [
         ProtocolItem(name: "Protocol 1", apr: 5.6, securityScore: 2, balance: 1200.50, url: "https://example.com", shortDescription: "This is a short description of the protocol.", tvl: "500M", launchDate: "2021-04-20", blockchain: "Ethereum", whitepaperURL: "https://example.com/whitepaper"),
@@ -46,8 +53,29 @@ struct ContentView: View {
                         Spacer()
                         
                         if let walletAddress = walletAddress {
-                            Text("Your address: \(walletAddress)")
-                                .multilineTextAlignment(.center)
+                            VStack {
+                                VStack {
+                                    Text("Your address:")
+                                        .bold()
+                                    Text(walletAddress)
+                                }
+                                Spacer()
+                                VStack {
+                                    Text("Your balance:")
+                                        .bold()
+                                    Text("\(balance) USDC")
+                                }
+                            }
+                            .padding(.top)
+                            Spacer()
+                            Button(action: { self.isCommunityPassPresented.toggle() }) {
+                                Text("Buy CommunityPass")
+                            }
+                            .buttonStyle(.borderedProminent)
+                            .tint(.blue)
+                            .controlSize(.large)
+                            .padding(.top, 10)
+                            .padding(.bottom, 10)
                         } else {
                             Text("You have not signed in yet")
                                 .multilineTextAlignment(.center)
@@ -59,15 +87,6 @@ struct ContentView: View {
                                 } else {
                                     Text("Sign in / sign up")
                                 }
-                            }
-                            .buttonStyle(.borderedProminent)
-                            .tint(.blue)
-                            .controlSize(.large)
-                            .padding(.top, 10)
-                            .padding(.bottom, 10)
-                            Spacer()
-                            Button(action: { self.isCommunityPassPresented.toggle() }) {
-                                Text("Buy CommunityPass")
                             }
                             .buttonStyle(.borderedProminent)
                             .tint(.blue)
@@ -119,6 +138,9 @@ struct ContentView: View {
                 self.adapter.initSDK(endPoint: "https://enduser-sdk.circle.com/v1/w3s", appId: "d4b087ec-88a2-582f-abcf-51eba61f8237")
             }
             .navigationTitle("Yield.me")
+            .refreshable {
+                await refreshBalance()
+            }
             .sheet(isPresented: $isCommunityPassPresented) {
                 PremiumPassView()
             }
@@ -143,10 +165,30 @@ struct ContentView: View {
         // Get the wallet address
         while true {
             let status = await self.networking.getWalletStatus(userToken: challenge.userToken)
-            if let address = status?.data.wallets.first?.address {
+            if let wallet = status?.data.wallets.first {
                 isLoading = false
-                walletAddress = address
+                walletAddress = wallet.address
+                User.shared.address = wallet.address
+                walletID = wallet.id
+                User.shared.walletID = wallet.id
+                self.userToken = challenge.userToken
+                
+                print(wallet.address)
+                
+                await refreshBalance()
                 break
+            }
+        }
+    }
+    
+    private func refreshBalance() async {
+        if let walletID = self.walletID, userToken.isEmpty == false {
+            let balance = await self.networking.getWalletBalance(userToken: userToken, walletID: walletID)
+            guard let balance = balance else { return }
+            for tokenBalance in balance.data.tokenBalances {
+                if tokenBalance.token.symbol == "USDC" {
+                    self.balance = tokenBalance.amount
+                }
             }
         }
     }
@@ -282,8 +324,4 @@ extension Color {
         }
         self.init(.sRGB, red: Double(r) / 255, green: Double(g) / 255, blue: Double(b) / 255, opacity: Double(a) / 255)
     }
-}
-
-#Preview {
-    ContentView()
 }

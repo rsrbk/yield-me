@@ -15,3 +15,13 @@ struct YieldMeApp: App {
         }
     }
 }
+
+
+class User {
+    static let shared = User()
+    let uuid = UUID().uuidString
+    var address: String?
+    var walletID: String?
+    
+    var sessionToken: SessionTokenResponse?
+}

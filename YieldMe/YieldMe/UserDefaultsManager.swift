@@ -10,19 +10,24 @@ import Foundation
 class UserDefaultsManager {
     static let shared = UserDefaultsManager()
 
-    private let uuidKey = "uniqueUUID"
-
-    var uuid: String {
+    private let addressKey = "address"
+    private let walletIDKey = "wallet_id"
+    
+    var walletAddress: String? {
         get {
-            // Try to get an existing UUID from UserDefaults
-            if let uuid = UserDefaults.standard.string(forKey: uuidKey) {
-                return uuid
-            } else {
-                // If not found, generate a new UUID, save it, and then return it
-                let newUUID = UUID().uuidString
-                UserDefaults.standard.set(newUUID, forKey: uuidKey)
-                return newUUID
-            }
+            UserDefaults.standard.string(forKey: addressKey)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: addressKey)
+        }
+    }
+    
+    var walletID: String? {
+        get {
+            UserDefaults.standard.string(forKey: walletIDKey)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: walletIDKey)
         }
     }
 
