@@ -117,11 +117,11 @@ struct ContractExecutionChallengeRequest: Codable {
             // Setting the rest of the parameters to nil
             self.callData = nil
             self.amount = nil
-            self.feeLevel = "MEDIUM"
-            self.gasLimit = "100000"
+            self.feeLevel = "HIGH"
+            self.gasLimit = nil
             self.gasPrice = nil
-            self.maxFee = "5.935224468"
-            self.priorityFee = "1.022783914"
+            self.maxFee = nil
+            self.priorityFee = nil
             self.refId = nil
         }
 }
@@ -131,4 +131,53 @@ struct ContractExecutionChallengeResponse: Codable {
         let challengeId: String
     }
     let data: Data
+}
+
+struct EstimateContractExecutionFeeRequest: Codable {
+    let abiFunctionSignature: String?
+    let abiParameters: [String]?
+    let callData: String?
+    let amount: String?
+    let blockchain: String?
+    let contractAddress: String
+    let sourceAddress: String?
+    let walletId: String?
+
+    init(
+        abiFunctionSignature: String? = nil,
+        abiParameters: [String]? = nil,
+        callData: String? = nil,
+        amount: String? = nil,
+        blockchain: String? = nil,
+        contractAddress: String,
+        sourceAddress: String? = nil,
+        walletId: String? = nil
+    ) {
+        self.abiFunctionSignature = abiFunctionSignature
+        self.abiParameters = abiParameters
+        self.callData = callData
+        self.amount = amount
+        self.blockchain = blockchain
+        self.contractAddress = contractAddress
+        self.sourceAddress = sourceAddress
+        self.walletId = walletId
+    }
+}
+
+// Define the response model for the estimated fee
+struct EstimatedTransactionFeeResponse: Codable {
+    let data: FeeData
+}
+
+struct FeeData: Codable {
+    let high: FeeEstimate
+    let medium: FeeEstimate
+    let low: FeeEstimate
+}
+
+struct FeeEstimate: Codable {
+    let gasLimit: String?
+    let gasPrice: String?
+    let maxFee: String?
+    let priorityFee: String?
 }

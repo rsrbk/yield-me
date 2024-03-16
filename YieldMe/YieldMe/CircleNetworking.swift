@@ -26,13 +26,14 @@ class CircleNetworking {
     }
     
     func getSignInChallenge() async -> CircleChallenge {
-        let userId = User.shared.uuid
+        let userId = UserDefaultsManager.shared.uuid
         
         let _ = await registerUser(userId: userId)
         let sessionToken = await getSessionToken(userId: userId)
         let account = await initializeAccount(userToken: sessionToken!.data.userToken, blockchains: ["MATIC-MUMBAI"])
         
-        User.shared.sessionToken = sessionToken
+        UserDefaultsManager.shared.userToken = sessionToken?.data.userToken
+        UserDefaultsManager.shared.encryptionKey = sessionToken?.data.encryptionKey
         
         return CircleChallenge(
             userToken: sessionToken!.data.userToken,
@@ -140,6 +141,30 @@ class CircleNetworking {
         }
     }
     
+    func estimateContractExecutionFee(requestModel: EstimateContractExecutionFeeRequest) async -> EstimatedTransactionFeeResponse? {
+            guard let url = URL(string: "https://api.circle.com/v1/w3s/transactions/contractExecution/estimateFee") else { return nil }
+            
+            guard let encodedBody = try? JSONEncoder().encode(requestModel) else {
+                print("Failed to encode request model")
+                return nil
+            }
+            
+            let request = createRequest(url: url, method: "POST", apiKey: apiKey, body: encodedBody)
+            
+            do {
+                let (data, response) = try await URLSession.shared.data(for: request)
+                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                    print("Request failed with response: \(response)")
+                    return nil
+                }
+                let decodedResponse = try JSONDecoder().decode(EstimatedTransactionFeeResponse.self, from: data)
+                return decodedResponse
+            } catch {
+                print("Error estimating contract execution fee: \(error.localizedDescription)")
+                return nil
+            }
+        }
+    
     // MARK: - Create User Transaction Contract Execution Challenge
     func createContractExecutionChallenge(requestModel: ContractExecutionChallengeRequest) async -> ContractExecutionChallengeResponse? {
         guard let url = URL(string: "\(baseUrl)/user/transactions/contractExecution") else { return nil }
@@ -149,11 +174,11 @@ class CircleNetworking {
             return nil
         }
         
-        let request = createRequest(url: url, method: "POST", apiKey: apiKey, userToken: User.shared.sessionToken!.data.userToken, body: encodedBody)
+        let request = createRequest(url: url, method: "POST", apiKey: apiKey, userToken: UserDefaultsManager.shared.userToken, body: encodedBody)
         
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
-            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 201 else {
                 print("Request failed with response: \(response)")
                 return nil
             }

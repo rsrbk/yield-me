@@ -24,12 +24,13 @@ struct ContentView: View {
     
     @State private var isCommunityPassPresented = false
     
-    @State var walletAddress: String?
-    @State var walletID: String?
-
+    @State var walletAddress: String? = UserDefaultsManager.shared.walletAddress
+    @State var walletID: String? = UserDefaultsManager.shared.walletID
     @State var balance: String = "0"
+    @State var userToken: String = UserDefaultsManager.shared.userToken ?? ""
     
-    @State var userToken: String = ""
+    @State var purchasedPass: Bool = UserDefaultsManager.shared.purchasedPass
+    
     
     let items: [ProtocolItem] = [
         ProtocolItem(name: "Protocol 1", apr: 5.6, securityScore: 2, balance: 1200.50, url: "https://example.com", shortDescription: "This is a short description of the protocol.", tvl: "500M", launchDate: "2021-04-20", blockchain: "Ethereum", whitepaperURL: "https://example.com/whitepaper"),
@@ -59,7 +60,6 @@ struct ContentView: View {
                                         .bold()
                                     Text(walletAddress)
                                 }
-                                Spacer()
                                 VStack {
                                     Text("Your balance:")
                                         .bold()
@@ -67,15 +67,19 @@ struct ContentView: View {
                                 }
                             }
                             .padding(.top)
-                            Spacer()
-                            Button(action: { self.isCommunityPassPresented.toggle() }) {
-                                Text("Buy CommunityPass")
+                            .padding(.bottom)
+                            if purchasedPass || UserDefaultsManager.shared.purchasedPass {
+                            } else {
+                                Button(action: { self.isCommunityPassPresented.toggle() }) {
+                                    Text("Buy Community Pass")
+                                }
+                                .buttonStyle(.borderedProminent)
+                                .tint(.blue)
+                                .controlSize(.large)
+                                .padding(.top, 10)
+                                .padding(.bottom, 10)
                             }
-                            .buttonStyle(.borderedProminent)
-                            .tint(.blue)
-                            .controlSize(.large)
-                            .padding(.top, 10)
-                            .padding(.bottom, 10)
+                            
                         } else {
                             Text("You have not signed in yet")
                                 .multilineTextAlignment(.center)
@@ -132,10 +136,43 @@ struct ContentView: View {
                     }
                 }
                 
+                if purchasedPass {
+                    Section {
+                        VStack(alignment: .center) {
+                            Text("You are an owner of a Community Pass!")
+                                .font(.headline)
+                                .padding()
+                            Image("community_pass", bundle: nil)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 150, height: 150)
+                                .cornerRadius(20)
+                                .padding()
+                                .cornerRadius(20)
+                                .padding([.leading, .trailing], 20)
+                            
+                            // List of features with infographics
+                            VStack(alignment: .leading, spacing: 8) {
+                                FeatureView(emoji: "📖", text: "Read other people's reviews ")
+                                FeatureView(emoji: "✍️", text: "Write your own reviews")
+                                FeatureView(emoji: "👍", text: "Upvote or downvote reviews")
+                                FeatureView(emoji: "💸", text: "Own a share of revenue")
+                            }
+                            Spacer()
+                        }
+                    }
+                }
                 
             }
             .onAppear {
                 self.adapter.initSDK(endPoint: "https://enduser-sdk.circle.com/v1/w3s", appId: "d4b087ec-88a2-582f-abcf-51eba61f8237")
+                if let walletAddress = UserDefaultsManager.shared.walletAddress,
+                   let walletID = UserDefaultsManager.shared.walletID,
+                   let userToken = UserDefaultsManager.shared.userToken {
+                    self.walletAddress = walletAddress
+                    self.walletID = walletID
+                    self.userToken = userToken
+                }
             }
             .navigationTitle("Yield.me")
             .refreshable {
@@ -144,6 +181,12 @@ struct ContentView: View {
             .sheet(isPresented: $isCommunityPassPresented) {
                 PremiumPassView()
             }
+            .onChange(of: isCommunityPassPresented) {
+                self.purchasedPass = UserDefaultsManager.shared.purchasedPass
+            }
+            .toast(message: toastMessage ?? "",
+                   isShowing: $showToast,
+                   config: toastConfig)
             //.navigationBarTitleDisplayMode(.inline)
             //.navigationDestination(for: ProtocolDetailView.self, destination: ProtocolItem.init)
         }
@@ -168,9 +211,9 @@ struct ContentView: View {
             if let wallet = status?.data.wallets.first {
                 isLoading = false
                 walletAddress = wallet.address
-                User.shared.address = wallet.address
+                UserDefaultsManager.shared.walletAddress = wallet.address
                 walletID = wallet.id
-                User.shared.walletID = wallet.id
+                UserDefaultsManager.shared.walletID = wallet.id
                 self.userToken = challenge.userToken
                 
                 print(wallet.address)

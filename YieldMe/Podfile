@@ -10,6 +10,7 @@ target 'YieldMe' do
   # use_frameworks! :linkage => :static
 
   pod 'CircleProgrammableWalletSDK'
+  pod 'BigInt'
 
 end
 

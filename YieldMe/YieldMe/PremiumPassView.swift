@@ -7,13 +7,20 @@
 
 import SwiftUI
 import CircleProgrammableWalletSDK
+import BigInt
 
 struct PremiumPassView: View {
     @State private var isStepOneCompleted: Bool = false
     
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.openURL) private var openURL
+    
     @State var isLoadingWorldCoin: Bool = false
+    @State var isLoadingMint: Bool = false
+
+    @State var showToast = false
+    @State var toastMessage: String?
+    @State var toastConfig: Toast.Config = .init()
     
     @State private var proof: WrappedProof?
     
@@ -96,25 +103,27 @@ struct PremiumPassView: View {
                         Text("Get your Premium Pass now for just $10 and start enjoying all the benefits.")
                             .font(.body)
                         
-                        Button(action: {
-                            // Implement the purchase functionality here
-                            Task.detached {
-                                await self.initiatePassMint()
+                        Button(action: initiatePassMint) {
+                            if isLoadingMint {
+                                ProgressView()
+                                    .progressViewStyle(CircularProgressViewStyle(tint: Color.white))
+                            } else {
+                                Text("Purchase for $10")
                             }
-                        }) {
-                            Text("Purchase for $10")
-                                .foregroundColor(.white)
-                                .padding()
-                                .background(Color.green)
-                                .cornerRadius(8)
                         }
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(Color.green)
+                        .cornerRadius(8)
                     }
                     .padding()
                 }
             }
             .padding(.horizontal, 20)
         }
-        .navigationTitle("Premium Pass")
+        .toast(message: toastMessage ?? "",
+               isShowing: $showToast,
+               config: toastConfig)
     }
     
     private func initiateWorldCoin() {
@@ -137,28 +146,34 @@ struct PremiumPassView: View {
         }
     }
     
-    private func initiatePassMint() async {
-        let request = ContractExecutionChallengeRequest(
-            idempotencyKey: UUID().uuidString,
-            abiFunctionSignature: "function buyPass( address passReceiver, uint256 paymentPeriod, uint256 root, uint256 nullifierHash, uint256[8] calldata proof ) public returns (uint256)",
-            abiParameters: [
-                User.shared.address!,
-                "1",
-                proof!.merkle_root.toString(),
-                proof!.nullifier_hash.toString(),
-                proof!.proof.toString()
-            ],
-            contractAddress: "0x938545C68Ed97E993aFFcF306aF33d08f2525A78",
-            walletId: User.shared.walletID!)
-        let response = await CircleNetworking().createContractExecutionChallenge(requestModel: request)
-        
-        let challenge = CircleChallenge(userToken: User.shared.sessionToken!.data.userToken, encryptionKey: User.shared.sessionToken!.data.encryptionKey, challengeId: response!.data.challengeId)
-        executeChallenge(challenge: challenge)
+    private func initiatePassMint() {
+        isLoadingMint = true
+        Task.detached {
+            let networking = CircleNetworking()
+
+            let request = ContractExecutionChallengeRequest(
+                idempotencyKey: UUID().uuidString,
+                abiFunctionSignature: "buyPass(address, uint256, uint256, uint256, bytes calldata)",
+                abiParameters: [
+                    UserDefaultsManager.shared.walletAddress!,
+                    "1",
+                    hexStringToDecimalString(proof!.merkle_root.toString())!,
+                    hexStringToDecimalString(proof!.nullifier_hash.toString())!,//,
+                    proof!.proof.toString()
+                ],
+                contractAddress: "0xaCe267a80E492f43aE30BccAF2f6049F4FcA05F7",
+                walletId: UserDefaultsManager.shared.walletID!)
+            let response = await CircleNetworking().createContractExecutionChallenge(requestModel: request)
+            
+            guard let userToken = UserDefaultsManager.shared.userToken else { return }
+            guard let encryptionKey = UserDefaultsManager.shared.encryptionKey else { return }
+            guard let challengeId = response?.data.challengeId else { return }
+            let challenge = CircleChallenge(userToken: userToken, encryptionKey: encryptionKey, challengeId: challengeId)
+            await executeChallenge(challenge: challenge)
+        }
     }
     
-    func executeChallenge(challenge: CircleChallenge) {
-        var showChallengeResult = true
-
+    @MainActor func executeChallenge(challenge: CircleChallenge) {
         WalletSdk.shared.execute(userToken: challenge.userToken,
                                  encryptionKey: challenge.encryptionKey,
                                  challengeIds: [challenge.challengeId]) { response in
@@ -169,18 +184,43 @@ struct PremiumPassView: View {
                 let warningType = response.onWarning?.warningType
                 let warningString = warningType != nil ?
                 " (\(warningType!))" : ""
+                
+                UserDefaultsManager.shared.purchasedPass = true
+                showToast(.success, message: "Community pass is purchased")
 
                 response.onErrorController?.dismiss(animated: true)
-
+                
             case .failure(let error):
-                if error.errorCode == .userCanceled {
-                    showChallengeResult = false
-                }
+                showToast(.failure, message: "Error: " + error.displayString)
             }
 
             if let onWarning = response.onWarning {
                 print(onWarning)
             }
+            
+            isLoadingMint = false
+            sleep(2)
+            presentationMode.wrappedValue.dismiss()
+        }
+    }
+    
+    enum ToastType {
+        case general
+        case success
+        case failure
+    }
+
+    func showToast(_ type: ToastType, message: String) {
+        toastMessage = message
+        showToast = true
+
+        switch type {
+        case .general:
+            toastConfig = Toast.Config()
+        case .success:
+            toastConfig = Toast.Config(backgroundColor: .green, duration: 2.0)
+        case .failure:
+            toastConfig = Toast.Config(backgroundColor: .pink, duration: 10.0)
         }
     }
 }
@@ -196,4 +236,17 @@ struct FeatureView: View {
                 .font(.body)
         }
     }
+}
+
+func hexStringToDecimalString(_ hexString: String) -> String? {
+    // Remove the "0x" prefix if present
+    let hex = hexString.hasPrefix("0x") ? String(hexString.dropFirst(2)) : hexString
+    
+    // Attempt to create a BigInt from the hexadecimal string
+    guard let bigInt = BigInt(hex, radix: 16) else {
+        return nil // Return nil if the string is not a valid hexadecimal number
+    }
+    
+    // Convert the BigInt to a decimal string and return it
+    return String(bigInt)
 }
