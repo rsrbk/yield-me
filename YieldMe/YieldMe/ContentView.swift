@@ -31,139 +31,20 @@ struct ContentView: View {
     
     @State var purchasedPass: Bool = UserDefaultsManager.shared.purchasedPass
     
+    let firebaseNetworking = FirebaseNetworking()
+//    
+//    let items: [ProtocolItem] = [
+//        ProtocolItem(name: "Protocol 1", apr: 5.6, securityScore: 2, balance: 1200.50, url: "https://example.com", shortDescription: "This is a short description of the protocol.", tvl: "500M", launchDate: "2021-04-20", blockchain: "Ethereum", whitepaperURL: "https://example.com/whitepaper"),
+//        ProtocolItem(name: "Protocol 1", apr: 5.6, securityScore: 3, balance: 1200.50, url: "https://example.com", shortDescription: "This is a short description of the protocol.", tvl: "500M", launchDate: "2021-04-20", blockchain: "Ethereum", whitepaperURL: "https://example.com/whitepaper"),
+//        ProtocolItem(name: "Protocol 1", apr: 5.6, securityScore: 4, balance: 1200.50, url: "https://example.com", shortDescription: "This is a short description of the protocol.", tvl: "500M", launchDate: "2021-04-20", blockchain: "Ethereum", whitepaperURL: "https://example.com/whitepaper")
+//                                            
+//    ]
     
-    let items: [ProtocolItem] = [
-        ProtocolItem(name: "Protocol 1", apr: 5.6, securityScore: 2, balance: 1200.50, url: "https://example.com", shortDescription: "This is a short description of the protocol.", tvl: "500M", launchDate: "2021-04-20", blockchain: "Ethereum", whitepaperURL: "https://example.com/whitepaper"),
-        ProtocolItem(name: "Protocol 1", apr: 5.6, securityScore: 3, balance: 1200.50, url: "https://example.com", shortDescription: "This is a short description of the protocol.", tvl: "500M", launchDate: "2021-04-20", blockchain: "Ethereum", whitepaperURL: "https://example.com/whitepaper"),
-        ProtocolItem(name: "Protocol 1", apr: 5.6, securityScore: 4, balance: 1200.50, url: "https://example.com", shortDescription: "This is a short description of the protocol.", tvl: "500M", launchDate: "2021-04-20", blockchain: "Ethereum", whitepaperURL: "https://example.com/whitepaper")
-                                            
-    ]
-
+    @State var items: [ProtocolItem] = []
+    
     var body: some View {
         NavigationStack {
-            List {
-                Section {
-                    VStack {
-                        Image("logo", bundle: nil)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 300, height: 300)
-                        Text("Your USDC will grow like mushrooms")
-                            .font(.system(size: 20, weight: .bold))
-                            .multilineTextAlignment(.center)
-                        Spacer()
-                        
-                        if let walletAddress = walletAddress {
-                            VStack {
-                                VStack {
-                                    Text("Your address:")
-                                        .bold()
-                                    Text(walletAddress)
-                                }
-                                VStack {
-                                    Text("Your balance:")
-                                        .bold()
-                                    Text("\(balance) USDC")
-                                }
-                            }
-                            .padding(.top)
-                            .padding(.bottom)
-                            if purchasedPass || UserDefaultsManager.shared.purchasedPass {
-                            } else {
-                                Button(action: { self.isCommunityPassPresented.toggle() }) {
-                                    Text("Buy Community Pass")
-                                }
-                                .buttonStyle(.borderedProminent)
-                                .tint(.blue)
-                                .controlSize(.large)
-                                .padding(.top, 10)
-                                .padding(.bottom, 10)
-                            }
-                            
-                        } else {
-                            Text("You have not signed in yet")
-                                .multilineTextAlignment(.center)
-                            Spacer()
-                            Button(action: initiateSignIn) {
-                                if isLoading {
-                                    ProgressView()
-                                        .progressViewStyle(CircularProgressViewStyle(tint: Color.white))
-                                } else {
-                                    Text("Sign in / sign up")
-                                }
-                            }
-                            .buttonStyle(.borderedProminent)
-                            .tint(.blue)
-                            .controlSize(.large)
-                            .padding(.top, 10)
-                            .padding(.bottom, 10)
-                        }
-                        
-                    }
-                }
-                .listRowBackground(Color(hex: "#E3FFE3"))
-                
-                Section {
-                    ForEach(items) { item in
-                        NavigationLink(destination: ProtocolDetailView(protocolItem: item)) {
-                            HStack {
-                                VStack(alignment: .leading, spacing: 4) {
-                                    Text(item.name)
-                                        .font(.headline) // Main title
-                                    Text("APR: \(item.apr, specifier: "%.2f")%")
-                                        .font(.subheadline) // Subtitle
-                                        .foregroundColor(.secondary) // Subtle color for subtitle
-                                    Text("Balance: $\(item.balance, specifier: "%.2f")")
-                                        .font(.subheadline) // Balance
-                                        .foregroundColor(.secondary) // Subtle color for balance
-                                }
-                                
-                                Spacer()
-                                
-                                VStack(alignment: .trailing, spacing: 4) {
-                                    // Security score might be visualized with a conditional color or icon
-                                    HStack(spacing: 2) {
-                                        ForEach(0..<item.securityScore, id: \.self) { _ in
-                                            Image(systemName: "lock.fill") // Example icon for security score
-                                                .foregroundColor(.green)
-                                        }
-                                    }
-                                    Text("Rating: \(item.securityScore)/5")
-                                        .font(.subheadline) // Security score on the right
-                                }
-                            }
-                        }
-                    }
-                }
-                
-                if purchasedPass {
-                    Section {
-                        VStack(alignment: .center) {
-                            Text("You are an owner of a Community Pass!")
-                                .font(.headline)
-                                .padding()
-                            Image("community_pass", bundle: nil)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 150, height: 150)
-                                .cornerRadius(20)
-                                .padding()
-                                .cornerRadius(20)
-                                .padding([.leading, .trailing], 20)
-                            
-                            // List of features with infographics
-                            VStack(alignment: .leading, spacing: 8) {
-                                FeatureView(emoji: "📖", text: "Read other people's reviews ")
-                                FeatureView(emoji: "✍️", text: "Write your own reviews")
-                                FeatureView(emoji: "👍", text: "Upvote or downvote reviews")
-                                FeatureView(emoji: "💸", text: "Own a share of revenue")
-                            }
-                            Spacer()
-                        }
-                    }
-                }
-                
-            }
+            mainList
             .onAppear {
                 self.adapter.initSDK(endPoint: "https://enduser-sdk.circle.com/v1/w3s", appId: "d4b087ec-88a2-582f-abcf-51eba61f8237")
                 if let walletAddress = UserDefaultsManager.shared.walletAddress,
@@ -173,6 +54,11 @@ struct ContentView: View {
                     self.walletID = walletID
                     self.userToken = userToken
                 }
+                
+                Task.detached {
+                    self.items = await firebaseNetworking.fetchProtocols()
+                }
+                
             }
             .navigationTitle("Yield.me")
             .refreshable {
@@ -189,6 +75,132 @@ struct ContentView: View {
                    config: toastConfig)
             //.navigationBarTitleDisplayMode(.inline)
             //.navigationDestination(for: ProtocolDetailView.self, destination: ProtocolItem.init)
+        }
+    }
+    
+    var mainList: some View {
+        List {
+            Section {
+                VStack {
+                    Image("logo", bundle: nil)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 300, height: 300)
+                    Text("Your USDC will grow like mushrooms")
+                        .font(.system(size: 20, weight: .bold))
+                        .multilineTextAlignment(.center)
+                    Spacer()
+                    
+                    if let walletAddress = walletAddress {
+                        VStack {
+                            VStack {
+                                Text("Your address:")
+                                    .bold()
+                                Text(walletAddress)
+                            }
+                            VStack {
+                                Text("Your balance:")
+                                    .bold()
+                                Text("\(balance) USDC")
+                            }
+                        }
+                        .padding(.top)
+                        .padding(.bottom)
+                        if purchasedPass || UserDefaultsManager.shared.purchasedPass {
+                        } else {
+                            Button(action: { self.isCommunityPassPresented.toggle() }) {
+                                Text("Buy Community Pass")
+                            }
+                            .buttonStyle(.borderedProminent)
+                            .tint(.blue)
+                            .controlSize(.large)
+                            .padding(.top, 10)
+                            .padding(.bottom, 10)
+                        }
+                        
+                    } else {
+                        Text("You have not signed in yet")
+                            .multilineTextAlignment(.center)
+                        Spacer()
+                        Button(action: initiateSignIn) {
+                            if isLoading {
+                                ProgressView()
+                                    .progressViewStyle(CircularProgressViewStyle(tint: Color.white))
+                            } else {
+                                Text("Sign in / sign up")
+                            }
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .tint(.blue)
+                        .controlSize(.large)
+                        .padding(.top, 10)
+                        .padding(.bottom, 10)
+                    }
+                    
+                }
+            }
+            .listRowBackground(Color(hex: "#E3FFE3"))
+            
+            Section {
+                ForEach($items) { item in
+                    NavigationLink(destination: ProtocolDetailView(protocolItem: item.wrappedValue)) {
+                        HStack {
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text(item.wrappedValue.name)
+                                    .font(.headline) // Main title
+                                Text("APR: \(item.wrappedValue.apr, specifier: "%.2f")%")
+                                    .font(.subheadline) // Subtitle
+                                    .foregroundColor(.secondary) // Subtle color for subtitle
+                                Text("Balance: $1000")//\(item.wrappedValue.balance, specifier: "%.2f")")
+                                    .font(.subheadline) // Balance
+                                    .foregroundColor(.secondary) // Subtle color for balance
+                            }
+                            
+                            Spacer()
+                            
+                            VStack(alignment: .trailing, spacing: 4) {
+                                // Security score might be visualized with a conditional color or icon
+                                HStack(spacing: 2) {
+                                    ForEach(0..<item.wrappedValue.rating, id: \.self) { _ in
+                                        Image(systemName: "lock.fill") // Example icon for security score
+                                            .foregroundColor(.green)
+                                    }
+                                }
+                                Text("Rating: \(item.wrappedValue.rating)/5")
+                                    .font(.subheadline) // Security score on the right
+                            }
+                        }
+                    }
+                }
+            }
+            
+            if purchasedPass {
+                Section {
+                    VStack(alignment: .center) {
+                        Text("You are an owner of a Community Pass!")
+                            .font(.headline)
+                            .padding()
+                        Image("community_pass", bundle: nil)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 150, height: 150)
+                            .cornerRadius(20)
+                            .padding()
+                            .cornerRadius(20)
+                            .padding([.leading, .trailing], 20)
+                        
+                        // List of features with infographics
+                        VStack(alignment: .leading, spacing: 8) {
+                            FeatureView(emoji: "📖", text: "Read other people's reviews ")
+                            FeatureView(emoji: "✍️", text: "Write your own reviews")
+                            FeatureView(emoji: "👍", text: "Upvote or downvote reviews")
+                            FeatureView(emoji: "💸", text: "Own a share of revenue")
+                        }
+                        Spacer()
+                    }
+                }
+            }
+            
         }
     }
     

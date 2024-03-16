@@ -26,6 +26,9 @@
 		378ADF822BA5143700F36413 /* libyield_me.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 378ADF812BA5142900F36413 /* libyield_me.a */; };
 		378ADF8A2BA514BB00F36413 /* yield-me.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378ADF842BA5145D00F36413 /* yield-me.swift */; };
 		378ADF8B2BA514BE00F36413 /* SwiftBridgeCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378ADF882BA5145D00F36413 /* SwiftBridgeCore.swift */; };
+		37B399B12BA6111B00DE42E6 /* FirebaseNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B399B02BA6111B00DE42E6 /* FirebaseNetworking.swift */; };
+		37B399B32BA61AD500DE42E6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37B399B22BA61AD500DE42E6 /* GoogleService-Info.plist */; };
+		37B399B52BA61BA600DE42E6 /* FirebaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B399B42BA61BA600DE42E6 /* FirebaseModel.swift */; };
 		8DCA889B7944853955F53507 /* Pods_YieldMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B47AADFD80C8AFDC29E8AFB5 /* Pods_YieldMe.framework */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +77,9 @@
 		378ADF862BA5145D00F36413 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		378ADF872BA5145D00F36413 /* SwiftBridgeCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftBridgeCore.h; sourceTree = "<group>"; };
 		378ADF882BA5145D00F36413 /* SwiftBridgeCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftBridgeCore.swift; sourceTree = "<group>"; };
+		37B399B02BA6111B00DE42E6 /* FirebaseNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseNetworking.swift; sourceTree = "<group>"; };
+		37B399B22BA61AD500DE42E6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		37B399B42BA61BA600DE42E6 /* FirebaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseModel.swift; sourceTree = "<group>"; };
 		B47AADFD80C8AFDC29E8AFB5 /* Pods_YieldMe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YieldMe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBCD00D21402E7FA17C66873 /* Pods-YieldMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YieldMe.release.xcconfig"; path = "Target Support Files/Pods-YieldMe/Pods-YieldMe.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -141,10 +147,13 @@
 		378ADF532BA512E000F36413 /* YieldMe */ = {
 			isa = PBXGroup;
 			children = (
+				37B399B22BA61AD500DE42E6 /* GoogleService-Info.plist */,
 				375D97422BA5189500A48C65 /* CircleChallenge.swift */,
 				375D97432BA5189500A48C65 /* CircleNetworking.swift */,
 				375D97412BA5189500A48C65 /* CircleRequestModels.swift */,
 				375D97482BA5189600A48C65 /* ContentView.swift */,
+				37B399B02BA6111B00DE42E6 /* FirebaseNetworking.swift */,
+				37B399B42BA61BA600DE42E6 /* FirebaseModel.swift */,
 				375D97562BA51DD600A48C65 /* PremiumPassView.swift */,
 				375D97472BA5189600A48C65 /* ProtocolDetailView.swift */,
 				375D97452BA5189500A48C65 /* UserDefaultsManager.swift */,
@@ -329,6 +338,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				378ADF5C2BA512E100F36413 /* Preview Assets.xcassets in Resources */,
+				37B399B32BA61AD500DE42E6 /* GoogleService-Info.plist in Resources */,
 				378ADF592BA512E100F36413 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -438,6 +448,8 @@
 				375D97572BA51DD600A48C65 /* PremiumPassView.swift in Sources */,
 				375D974A2BA5189600A48C65 /* CircleChallenge.swift in Sources */,
 				375D97502BA5189600A48C65 /* ContentView.swift in Sources */,
+				37B399B12BA6111B00DE42E6 /* FirebaseNetworking.swift in Sources */,
+				37B399B52BA61BA600DE42E6 /* FirebaseModel.swift in Sources */,
 				375D974E2BA5189600A48C65 /* WalletSdkAdapter.swift in Sources */,
 				375D97552BA518A100A48C65 /* UserDefault.swift in Sources */,
 				375D97542BA518A100A48C65 /* Toast.swift in Sources */,

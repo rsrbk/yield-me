@@ -10,11 +10,22 @@ import SwiftUI
 struct ProtocolDetailView: View {
     var protocolItem: ProtocolItem // Assume ProtocolItem includes all necessary details
     @State private var newCommentText: String = ""
-    @State private var likesCount: Int = 0
-    @State private var dislikesCount: Int = 0
+    @State private var likesCount: Int = Int.random(in: 0...10)
+    @State private var dislikesCount: Int = Int.random(in: 0...10)
     
     var body: some View {
         Form {
+            Section {
+                     HStack {
+                         Spacer()
+                         Image(protocolItem.name) // Your logo image name
+                             .resizable()
+                             .scaledToFit()
+                             .frame(height: 100) // Adjust the height as needed
+                         Spacer()
+                     }
+                 }
+                 
             Section(header: Text("Details")) {
                 HStack {
                     Text("Title")
@@ -37,7 +48,7 @@ struct ProtocolDetailView: View {
                     Text("TVL")
                         .bold()
                     Spacer()
-                    Text(String(format: "$%.2f", protocolItem.tvl))
+                    Text(protocolItem.tvl)
                 }
                 
                 HStack {
@@ -51,14 +62,14 @@ struct ProtocolDetailView: View {
                     Text("Blockchain")
                         .bold()
                     Spacer()
-                    Text(protocolItem.blockchain)
+                    Text(protocolItem.network)
                 }
                 
                 HStack {
                     Text("Whitepaper")
                         .bold()
                     Spacer()
-                    Link("View", destination: URL(string: protocolItem.whitepaperURL)!)
+                    Link("View", destination: URL(string: protocolItem.whitepaper)!)
                         .foregroundColor(.blue)
                 }
                 
@@ -66,7 +77,7 @@ struct ProtocolDetailView: View {
                     Text("Security Score")
                         .bold()
                     Spacer()
-                    Text("\(protocolItem.securityScore) / 5")
+                    Text("\(protocolItem.rating) / 5")
                 }
             }
             
@@ -139,7 +150,7 @@ struct ProtocolDetailView: View {
                 }
             }
         }
-        .navigationTitle("Protocol Details")
+        .navigationTitle(protocolItem.name)
     }
 }
 
@@ -206,28 +217,5 @@ struct CommentInputForm: View {
             .buttonStyle(.borderedProminent)
             .disabled(commentText.isEmpty)
         }
-    }
-}
-
-// Dummy data structure for ProtocolItem, replace with your actual data model
-struct ProtocolItem: Identifiable, Hashable {
-    let id = UUID()
-    
-    var name: String
-    var apr: Double
-    var securityScore: Int
-    var balance: Double // Add a balance property
-    var url: String
-    var shortDescription: String
-    var tvl: String
-    var launchDate: String
-    var blockchain: String
-    var whitepaperURL: String
-}
-
-// Dummy data for preview
-struct ProtocolDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProtocolDetailView(protocolItem: ProtocolItem(name: "Protocol 1", apr: 5.6, securityScore: 8, balance: 1200.50, url: "https://example.com", shortDescription: "This is a short description of the protocol.", tvl: "500M", launchDate: "2021-04-20", blockchain: "Ethereum", whitepaperURL: "https://example.com/whitepaper"))
     }
 }
