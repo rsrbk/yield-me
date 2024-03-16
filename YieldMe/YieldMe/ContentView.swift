@@ -89,7 +89,6 @@ struct ContentView: View {
                     Text("Your USDC will grow like mushrooms")
                         .font(.system(size: 20, weight: .bold))
                         .multilineTextAlignment(.center)
-                    Spacer()
                     
                     if let walletAddress = walletAddress {
                         VStack {
@@ -105,7 +104,6 @@ struct ContentView: View {
                             }
                         }
                         .padding(.top)
-                        .padding(.bottom)
                         if purchasedPass || UserDefaultsManager.shared.purchasedPass {
                         } else {
                             Button(action: { self.isCommunityPassPresented.toggle() }) {
