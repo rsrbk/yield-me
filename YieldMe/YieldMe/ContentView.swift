@@ -270,7 +270,6 @@ extension ContentView {
     }
 
     func executeChallenge(challenge: CircleChallenge) {
-        var showChallengeResult = true
 
         WalletSdk.shared.execute(userToken: challenge.userToken,
                                  encryptionKey: challenge.encryptionKey,
@@ -282,7 +281,7 @@ extension ContentView {
                 let warningType = response.onWarning?.warningType
                 let warningString = warningType != nil ?
                 " (\(warningType!))" : ""
-                showToast(.success, message: "\(challeangeType) - \(challengeStatus)\(warningString)")
+                showToast(.success, message: "Creating the wallet")
 
                 response.onErrorController?.dismiss(animated: true)
                 
@@ -293,10 +292,6 @@ extension ContentView {
             case .failure(let error):
                 showToast(.failure, message: "Error: " + error.displayString)
                 errorHandler(apiError: error, onErrorController: response.onErrorController)
-
-                if error.errorCode == .userCanceled {
-                    showChallengeResult = false
-                }
             }
 
             if let onWarning = response.onWarning {

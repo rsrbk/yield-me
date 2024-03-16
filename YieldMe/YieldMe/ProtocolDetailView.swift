@@ -22,6 +22,10 @@ struct ProtocolDetailView: View {
     
     let firebaseNetworking = FirebaseNetworking()
     
+    @State var showToast = false
+    @State var toastMessage: String?
+    @State var toastConfig: Toast.Config = .init()
+    
     var body: some View {
         Form {
             Section {
@@ -207,6 +211,9 @@ struct ProtocolDetailView: View {
                 self.comments = await firebaseNetworking.fetchComments(for: protocolItem.id)
             }
         }
+        .toast(message: toastMessage ?? "",
+               isShowing: $showToast,
+               config: toastConfig)
     }
     
     func depositFunds() {
@@ -217,7 +224,28 @@ struct ProtocolDetailView: View {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             // Transaction is sent; stop the progress animation
             isProcessingDeposit = false
+            showToast(.success, message: "Deposit successful!")
             // Here you would have your logic to actually deposit the funds
+        }
+    }
+    
+    enum ToastType {
+        case general
+        case success
+        case failure
+    }
+
+    func showToast(_ type: ToastType, message: String) {
+        toastMessage = message
+        showToast = true
+
+        switch type {
+        case .general:
+            toastConfig = Toast.Config()
+        case .success:
+            toastConfig = Toast.Config(backgroundColor: .green, duration: 2.0)
+        case .failure:
+            toastConfig = Toast.Config(backgroundColor: .pink, duration: 10.0)
         }
     }
 }
