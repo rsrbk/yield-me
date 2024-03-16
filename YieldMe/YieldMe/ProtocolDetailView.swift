@@ -85,75 +85,77 @@ struct ProtocolDetailView: View {
                 }
             }
             
-            
-            Section(header: Text("Like or Dislike")) {
-                HStack(spacing: 40) {
-                    // Like Button
-                    Button(action: {
-                        // Logic to increment the likes count
-                        likesCount += 1
-                        // Implement logic for liking once or toggling like/dislike if needed
-                    }) {
-                        VStack {
-                            Text("👍")
-                                .font(.largeTitle)
-                            Text("\(likesCount)")
-                                .font(.title) // Bigger font size
-                                .foregroundColor(.black) // Black text color
+            if UserDefaultsManager.shared.purchasedPass {
+                Section(header: Text("Like or Dislike")) {
+                    HStack(spacing: 40) {
+                        // Like Button
+                        Button(action: {
+                            // Logic to increment the likes count
+                            likesCount += 1
+                            // Implement logic for liking once or toggling like/dislike if needed
+                        }) {
+                            VStack {
+                                Text("👍")
+                                    .font(.largeTitle)
+                                Text("\(likesCount)")
+                                    .font(.title) // Bigger font size
+                                    .foregroundColor(.black) // Black text color
+                            }
                         }
-                    }
-                    .buttonStyle(BorderlessButtonStyle())
-                    .frame(minWidth: 0, maxWidth: .infinity)
-                    
-                    // Dislike Button
-                    Button(action: {
-                        // Logic to increment the dislikes count
-                        dislikesCount += 1
-                        // Implement logic for disliking once or toggling like/dislike if needed
-                    }) {
-                        VStack {
-                            Text("👎")
-                                .font(.largeTitle)
-                            Text("\(dislikesCount)")
-                                .font(.title) // Bigger font size
-                                .foregroundColor(.black) // Black text color
+                        .buttonStyle(BorderlessButtonStyle())
+                        .frame(minWidth: 0, maxWidth: .infinity)
+                        
+                        // Dislike Button
+                        Button(action: {
+                            // Logic to increment the dislikes count
+                            dislikesCount += 1
+                            // Implement logic for disliking once or toggling like/dislike if needed
+                        }) {
+                            VStack {
+                                Text("👎")
+                                    .font(.largeTitle)
+                                Text("\(dislikesCount)")
+                                    .font(.title) // Bigger font size
+                                    .foregroundColor(.black) // Black text color
+                            }
                         }
+                        .buttonStyle(BorderlessButtonStyle())
+                        .frame(minWidth: 0, maxWidth: .infinity)
                     }
-                    .buttonStyle(BorderlessButtonStyle())
-                    .frame(minWidth: 0, maxWidth: .infinity)
+                    .padding()
                 }
-                .padding()
-            }
 
-            Section(header: Text("Comments")) {
-                if comments.isEmpty {
-                    Text("No comments yet.")
-                        .foregroundColor(.gray)
-                } else {
-                    ForEach(comments, id: \.id) { comment in
-                        CommentView(comment: comment)
+                Section(header: Text("Comments")) {
+                    if comments.isEmpty {
+                        Text("No comments yet.")
+                            .foregroundColor(.gray)
+                    } else {
+                        ForEach(comments, id: \.id) { comment in
+                            CommentView(comment: comment)
+                        }
                     }
-                }
-                
-                HStack {
-                    TextField("Add a comment...", text: $newCommentText)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
                     
-                    Button(action: {
-                        // Actions to add the comment
-                        // Add the new comment to the list of comments
-                        // You would implement the logic to append the new comment here
-                        // For example, you might call a function to post the comment to your server or database
-                    }) {
-                        Image(systemName: "paperplane.fill")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 24, height: 24)
+                    HStack {
+                        TextField("Add a comment...", text: $newCommentText)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                        
+                        Button(action: {
+                            // Actions to add the comment
+                            // Add the new comment to the list of comments
+                            // You would implement the logic to append the new comment here
+                            // For example, you might call a function to post the comment to your server or database
+                        }) {
+                            Image(systemName: "paperplane.fill")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 24, height: 24)
+                        }
+                        .buttonStyle(BorderlessButtonStyle())
+                        .disabled(newCommentText.isEmpty)
                     }
-                    .buttonStyle(BorderlessButtonStyle())
-                    .disabled(newCommentText.isEmpty)
                 }
             }
+            
         }
         .navigationTitle(protocolItem.name)
         .onAppear {
