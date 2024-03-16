@@ -11,6 +11,7 @@ target 'YieldMe' do
 
   pod 'CircleProgrammableWalletSDK'
   pod 'BigInt'
+  pod 'FirebaseFirestore'
 
 end
 

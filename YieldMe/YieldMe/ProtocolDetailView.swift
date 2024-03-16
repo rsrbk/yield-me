@@ -10,7 +10,9 @@ import SwiftUI
 struct ProtocolDetailView: View {
     var protocolItem: ProtocolItem // Assume ProtocolItem includes all necessary details
     @State private var newCommentText: String = ""
-
+    @State private var likesCount: Int = 0
+    @State private var dislikesCount: Int = 0
+    
     var body: some View {
         Form {
             Section(header: Text("Details")) {
@@ -68,6 +70,45 @@ struct ProtocolDetailView: View {
                 }
             }
             
+            Section(header: Text("Like or Dislike")) {
+                HStack(spacing: 40) {
+                    // Like Button
+                    Button(action: {
+                        // Logic to increment the likes count
+                        likesCount += 1
+                        // Implement logic for liking once or toggling like/dislike if needed
+                    }) {
+                        VStack {
+                            Text("👍")
+                                .font(.largeTitle)
+                            Text("\(likesCount)")
+                                .font(.title) // Bigger font size
+                                .foregroundColor(.black) // Black text color
+                        }
+                    }
+                    .buttonStyle(BorderlessButtonStyle())
+                    .frame(minWidth: 0, maxWidth: .infinity)
+                    
+                    // Dislike Button
+                    Button(action: {
+                        // Logic to increment the dislikes count
+                        dislikesCount += 1
+                        // Implement logic for disliking once or toggling like/dislike if needed
+                    }) {
+                        VStack {
+                            Text("👎")
+                                .font(.largeTitle)
+                            Text("\(dislikesCount)")
+                                .font(.title) // Bigger font size
+                                .foregroundColor(.black) // Black text color
+                        }
+                    }
+                    .buttonStyle(BorderlessButtonStyle())
+                    .frame(minWidth: 0, maxWidth: .infinity)
+                }
+                .padding()
+            }
+
             Section(header: Text("Comments")) {
                 if protocolItem.comments.isEmpty {
                     Text("No comments yet.")
