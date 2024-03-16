@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import GaugeKit
 
 struct ProtocolDetailView: View {
     var protocolItem: ProtocolItem // Assume ProtocolItem includes all necessary details
@@ -83,6 +84,15 @@ struct ProtocolDetailView: View {
                         .bold()
                     Spacer()
                     Text("\(protocolItem.rating) / 5")
+                }
+            }
+            
+            Section("Security score") {
+                HStack {
+                    Spacer()
+                    GaugeView(title: "out of 100", value: protocolItem.rating * 20, colors: [.red, .orange, .yellow, .green])
+                        .frame(height: 200, alignment: .center)
+                    Spacer()
                 }
             }
             

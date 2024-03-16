@@ -29,6 +29,8 @@
 		37B399B12BA6111B00DE42E6 /* FirebaseNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B399B02BA6111B00DE42E6 /* FirebaseNetworking.swift */; };
 		37B399B32BA61AD500DE42E6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37B399B22BA61AD500DE42E6 /* GoogleService-Info.plist */; };
 		37B399B52BA61BA600DE42E6 /* FirebaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B399B42BA61BA600DE42E6 /* FirebaseModel.swift */; };
+		37B399B72BA63F0F00DE42E6 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B399B62BA63F0F00DE42E6 /* RatingView.swift */; };
+		37B399BA2BA6453D00DE42E6 /* GaugeKit in Frameworks */ = {isa = PBXBuildFile; productRef = 37B399B92BA6453D00DE42E6 /* GaugeKit */; };
 		8DCA889B7944853955F53507 /* Pods_YieldMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B47AADFD80C8AFDC29E8AFB5 /* Pods_YieldMe.framework */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +82,7 @@
 		37B399B02BA6111B00DE42E6 /* FirebaseNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseNetworking.swift; sourceTree = "<group>"; };
 		37B399B22BA61AD500DE42E6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		37B399B42BA61BA600DE42E6 /* FirebaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseModel.swift; sourceTree = "<group>"; };
+		37B399B62BA63F0F00DE42E6 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		B47AADFD80C8AFDC29E8AFB5 /* Pods_YieldMe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YieldMe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBCD00D21402E7FA17C66873 /* Pods-YieldMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YieldMe.release.xcconfig"; path = "Target Support Files/Pods-YieldMe/Pods-YieldMe.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -91,6 +94,7 @@
 			files = (
 				378ADF822BA5143700F36413 /* libyield_me.a in Frameworks */,
 				8DCA889B7944853955F53507 /* Pods_YieldMe.framework in Frameworks */,
+				37B399BA2BA6453D00DE42E6 /* GaugeKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,6 +162,7 @@
 				375D97472BA5189600A48C65 /* ProtocolDetailView.swift */,
 				375D97452BA5189500A48C65 /* UserDefaultsManager.swift */,
 				375D97462BA5189500A48C65 /* WalletSdkAdapter.swift */,
+				37B399B62BA63F0F00DE42E6 /* RatingView.swift */,
 				375D97442BA5189500A48C65 /* YieldMeApp.swift */,
 				375D97532BA518A100A48C65 /* Helpers */,
 				378ADF582BA512E100F36413 /* Assets.xcassets */,
@@ -249,6 +254,9 @@
 			dependencies = (
 			);
 			name = YieldMe;
+			packageProductDependencies = (
+				37B399B92BA6453D00DE42E6 /* GaugeKit */,
+			);
 			productName = YieldMe;
 			productReference = 378ADF512BA512E000F36413 /* YieldMe.app */;
 			productType = "com.apple.product-type.application";
@@ -321,6 +329,9 @@
 				Base,
 			);
 			mainGroup = 378ADF482BA512E000F36413;
+			packageReferences = (
+				37B399B82BA644D600DE42E6 /* XCRemoteSwiftPackageReference "gaugekit" */,
+			);
 			productRefGroup = 378ADF522BA512E000F36413 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -454,6 +465,7 @@
 				375D97552BA518A100A48C65 /* UserDefault.swift in Sources */,
 				375D97542BA518A100A48C65 /* Toast.swift in Sources */,
 				375D97492BA5189600A48C65 /* CircleRequestModels.swift in Sources */,
+				37B399B72BA63F0F00DE42E6 /* RatingView.swift in Sources */,
 				378ADF8A2BA514BB00F36413 /* yield-me.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -794,6 +806,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		37B399B82BA644D600DE42E6 /* XCRemoteSwiftPackageReference "gaugekit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/antonmartinsson/gaugekit.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		37B399B92BA6453D00DE42E6 /* GaugeKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 37B399B82BA644D600DE42E6 /* XCRemoteSwiftPackageReference "gaugekit" */;
+			productName = GaugeKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 378ADF492BA512E000F36413 /* Project object */;
 }
