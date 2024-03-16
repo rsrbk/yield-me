@@ -21,3 +21,9 @@ struct ProtocolItem: Identifiable, Hashable, Codable {
     var network: String
     var whitepaper: String
 }
+
+struct Comment: Identifiable, Codable {
+    let id: Int
+    let user: String
+    let text: String
+}

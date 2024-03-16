@@ -13,6 +13,10 @@ struct ProtocolDetailView: View {
     @State private var likesCount: Int = Int.random(in: 0...10)
     @State private var dislikesCount: Int = Int.random(in: 0...10)
     
+    @State private var comments: [Comment] = []
+    
+    let firebaseNetworking = FirebaseNetworking()
+    
     var body: some View {
         Form {
             Section {
@@ -81,6 +85,7 @@ struct ProtocolDetailView: View {
                 }
             }
             
+            
             Section(header: Text("Like or Dislike")) {
                 HStack(spacing: 40) {
                     // Like Button
@@ -121,11 +126,11 @@ struct ProtocolDetailView: View {
             }
 
             Section(header: Text("Comments")) {
-                if protocolItem.comments.isEmpty {
+                if comments.isEmpty {
                     Text("No comments yet.")
                         .foregroundColor(.gray)
                 } else {
-                    ForEach(protocolItem.comments, id: \.id) { comment in
+                    ForEach(comments, id: \.id) { comment in
                         CommentView(comment: comment)
                     }
                 }
@@ -151,28 +156,13 @@ struct ProtocolDetailView: View {
             }
         }
         .navigationTitle(protocolItem.name)
+        .onAppear {
+            Task.detached {
+                self.comments = await firebaseNetworking.fetchComments(for: protocolItem.id)
+            }
+        }
     }
 }
-
-// Mock model extension to include additional details and comments
-extension ProtocolItem {
-    var comments: [Comment] {
-        [
-            Comment(id: 1, name: "Alice", profilePicture: "placeholder", time: Date(), text: "Great protocol!"),
-            Comment(id: 2, name: "Bob", profilePicture: "placeholder", time: Date().addingTimeInterval(-3600), text: "Looking forward to the new features."),
-            // Add more mock comments as needed
-        ]
-    }
-}
-
-struct Comment: Identifiable {
-    let id: Int
-    let name: String
-    let profilePicture: String
-    let time: Date
-    let text: String
-}
-
 
 struct CommentView: View {
     var comment: Comment
@@ -188,10 +178,10 @@ struct CommentView: View {
             VStack(alignment: .leading) {
                 // Name and time
                 HStack {
-                    Text(comment.name)
+                    Text(comment.user)
                         .font(.headline)
                     Spacer()
-                    Text(comment.time, style: .time)
+                    Text(Date(), style: .time)
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }

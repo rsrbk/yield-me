@@ -22,4 +22,14 @@ class FirebaseNetworking {
             try? document.data(as: ProtocolItem.self)
         }
     }
+    
+    func fetchComments(for id: Int) async -> [Comment] {
+        let querySnapshot = try! await db.collection("comments")
+            .whereField("projectId", isEqualTo: id)
+            .getDocuments()
+        
+        return querySnapshot.documents.compactMap { document -> Comment? in
+            try? document.data(as: Comment.self)
+        }
+    }
 }
