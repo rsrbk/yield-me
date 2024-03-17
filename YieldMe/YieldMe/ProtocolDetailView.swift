@@ -7,6 +7,8 @@
 
 import SwiftUI
 import GaugeKit
+import CircleProgrammableWalletSDK
+import BigInt
 
 struct ProtocolDetailView: View {
     var protocolItem: ProtocolItem // Assume ProtocolItem includes all necessary details
@@ -219,13 +221,55 @@ struct ProtocolDetailView: View {
     func depositFunds() {
         // Start the progress animation
         isProcessingDeposit = true
-
-        // Simulate a network request to deposit funds
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            // Transaction is sent; stop the progress animation
+        
+        Task.detached {
+            print(depositAmount)
+            let request = ContractExecutionChallengeRequest(
+                idempotencyKey: UUID().uuidString,
+                abiFunctionSignature: "depositIntoPool(uint256, uint256)",
+                abiParameters: [
+                    "\(protocolItem.id)",
+                    "\(BigInt(depositAmount)! * BigInt(100000000000000000))"
+                ],
+                contractAddress: "0x17dE46BAB525309fE846f0eeD4A4dcBFBfB588d4",
+                walletId: UserDefaultsManager.shared.walletID!)
+            let response = await CircleNetworking().createContractExecutionChallenge(requestModel: request)
+            
+            guard let userToken = UserDefaultsManager.shared.userToken else { return }
+            guard let encryptionKey = UserDefaultsManager.shared.encryptionKey else { return }
+            guard let challengeId = response?.data.challengeId else { return }
+            let challenge = CircleChallenge(userToken: userToken, encryptionKey: encryptionKey, challengeId: challengeId)
+            await executeChallenge(challenge: challenge)
+        }
+    }
+    
+    @MainActor func executeChallenge(challenge: CircleChallenge) {
+        WalletSdk.shared.execute(userToken: challenge.userToken,
+                                 encryptionKey: challenge.encryptionKey,
+                                 challengeIds: [challenge.challengeId]) { response in
+            switch response.result {
+            case .success(let result):
+                let challengeStatus = result.status.rawValue
+                let challeangeType = result.resultType.rawValue
+                let warningType = response.onWarning?.warningType
+                let warningString = warningType != nil ?
+                " (\(warningType!))" : ""
+                
+                UserDefaultsManager.shared.purchasedPass = true
+                showToast(.success, message: "Community pass is purchased")
+                
+                response.onErrorController?.dismiss(animated: true)
+                
+            case .failure(let error):
+                showToast(.failure, message: "Error: " + error.displayString)
+            }
+            
+            if let onWarning = response.onWarning {
+                print(onWarning)
+            }
+            
             isProcessingDeposit = false
             showToast(.success, message: "Deposit successful!")
-            // Here you would have your logic to actually deposit the funds
         }
     }
     
@@ -294,10 +338,4 @@ struct CommentInputForm: View {
             .disabled(commentText.isEmpty)
         }
     }
-}
-
-func truncateString(_ string: String, toMaxLength maxLength: Int) -> String {
-    guard string.count > maxLength else { return string }
-    let index = string.index(string.startIndex, offsetBy: maxLength)
-    return String(string[..<index]) + "..."
 }

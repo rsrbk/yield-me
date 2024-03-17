@@ -25,9 +25,7 @@ struct ContentView: View {
     @State private var isCommunityPassPresented = false
     
     @State var walletAddress: String? = UserDefaultsManager.shared.walletAddress
-    @State var walletID: String? = UserDefaultsManager.shared.walletID
     @State var balance: String = "0"
-    @State var userToken: String = UserDefaultsManager.shared.userToken ?? ""
     
     @State var purchasedPass: Bool = UserDefaultsManager.shared.purchasedPass
     
@@ -47,12 +45,8 @@ struct ContentView: View {
             mainList
             .onAppear {
                 self.adapter.initSDK(endPoint: "https://enduser-sdk.circle.com/v1/w3s", appId: "d4b087ec-88a2-582f-abcf-51eba61f8237")
-                if let walletAddress = UserDefaultsManager.shared.walletAddress,
-                   let walletID = UserDefaultsManager.shared.walletID,
-                   let userToken = UserDefaultsManager.shared.userToken {
+                if let walletAddress = UserDefaultsManager.shared.walletAddress {
                     self.walletAddress = walletAddress
-                    self.walletID = walletID
-                    self.userToken = userToken
                 }
                 
                 Task.detached {
@@ -93,10 +87,19 @@ struct ContentView: View {
                     if let walletAddress = walletAddress {
                         VStack {
                             VStack {
-                                Text("Your address:")
-                                    .bold()
-                                Text(walletAddress)
-                            }
+                                        Text("Your address:")
+                                            .bold()
+                                        HStack {
+                                            Text(truncateString(walletAddress, toMaxLength: 20))
+                                            Button(action: {
+                                                UIPasteboard.general.string = walletAddress
+                                            }) {
+                                                Image(systemName: "doc.on.doc")
+                                                    .foregroundColor(.black)
+                                            }
+                                            .buttonStyle(BorderlessButtonStyle())
+                                        }
+                                    }
                             VStack {
                                 Text("Your balance:")
                                     .bold()
@@ -222,9 +225,8 @@ struct ContentView: View {
                 isLoading = false
                 walletAddress = wallet.address
                 UserDefaultsManager.shared.walletAddress = wallet.address
-                walletID = wallet.id
                 UserDefaultsManager.shared.walletID = wallet.id
-                self.userToken = challenge.userToken
+                UserDefaultsManager.shared.userToken = challenge.userToken
                 
                 print(wallet.address)
                 
@@ -235,7 +237,7 @@ struct ContentView: View {
     }
     
     private func refreshBalance() async {
-        if let walletID = self.walletID, userToken.isEmpty == false {
+        if let walletID = UserDefaultsManager.shared.walletID, let userToken = UserDefaultsManager.shared.userToken {
             let balance = await self.networking.getWalletBalance(userToken: userToken, walletID: walletID)
             guard let balance = balance else { return }
             for tokenBalance in balance.data.tokenBalances {
@@ -372,4 +374,10 @@ extension Color {
         }
         self.init(.sRGB, red: Double(r) / 255, green: Double(g) / 255, blue: Double(b) / 255, opacity: Double(a) / 255)
     }
+}
+
+func truncateString(_ string: String, toMaxLength maxLength: Int) -> String {
+    guard string.count > maxLength else { return string }
+    let index = string.index(string.startIndex, offsetBy: maxLength)
+    return String(string[..<index]) + "..."
 }
